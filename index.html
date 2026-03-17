@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Catalogue Tarifaire 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+  --cream:#f6f1eb;
+  --ink:#1a1615;
+  --warm:#e8ded2;
+  --rust:#c44d2b;
+  --forest:#2d5a3d;
+  --mustard:#d4a23a;
+  --clay:#a0785a;
+  --stone:#6b6560;
+  --light-stone:#9a938c;
+}
+
+html{scroll-behavior:smooth}
+body{
+  font-family:'Instrument Sans',sans-serif;
+  background:var(--cream);
+  color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+::selection{background:var(--rust);color:#fff}
+
+/* ── LAYOUT ── */
+.wrap{max-width:1140px;margin:0 auto;padding:0 28px}
+
+/* ── TOPBAR ── */
+.topbar{
+  padding:16px 0;
+  border-bottom:1px solid var(--ink);
+  font-size:.75rem;
+  letter-spacing:.5px;
+  text-transform:uppercase;
+  display:flex;justify-content:space-between;align-items:center;
+  font-family:'JetBrains Mono',monospace;
+}
+.topbar a{color:var(--ink);text-decoration:none}
+.topbar a:hover{color:var(--rust)}
+
+/* ── HEADER ── */
+.header{
+  padding:80px 0 60px;
+  border-bottom:2px solid var(--ink);
+}
+.header-top{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  margin-bottom:40px;gap:40px;flex-wrap:wrap;
+}
+.header h1{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(3.2rem,8vw,7rem);
+  line-height:.92;
+  letter-spacing:-3px;
+  font-weight:400;
+  max-width:700px;
+}
+.header h1 em{
+  font-style:italic;
+  color:var(--rust);
+}
+.header-meta{
+  font-size:.85rem;color:var(--stone);
+  max-width:280px;line-height:1.7;
+  text-align:right;
+}
+.header-meta strong{color:var(--ink);display:block;margin-bottom:4px}
+.edition-tag{
+  display:inline-block;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.65rem;letter-spacing:2px;text-transform:uppercase;
+  background:var(--ink);color:var(--cream);
+  padding:6px 14px;margin-top:16px;
+}
+
+/* ── MARQUEE ── */
+.marquee-wrap{
+  overflow:hidden;border-bottom:1px solid var(--ink);
+  padding:14px 0;
+}
+.marquee{
+  display:flex;gap:48px;
+  animation:scroll 25s linear infinite;
+  width:max-content;
+}
+.marquee span{
+  font-family:'DM Serif Display',serif;
+  font-size:1.1rem;white-space:nowrap;
+  color:var(--light-stone);
+}
+.marquee span b{color:var(--rust);font-weight:400}
+@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ── CATEGORY ── */
+.cat{
+  padding:56px 0 0;
+}
+.cat-head{
+  display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:20px;
+  padding-bottom:20px;
+  border-bottom:1px solid rgba(26,22,21,.15);
+  margin-bottom:28px;
+}
+.cat-num{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.7rem;letter-spacing:1px;
+  color:var(--light-stone);
+}
+.cat-name{
+  font-family:'DM Serif Display',serif;
+  font-size:1.8rem;font-weight:400;
+  letter-spacing:-.5px;
+}
+.cat-count{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.7rem;color:var(--light-stone);
+  text-align:right;
+}
+
+/* ── SERVICE TABLE ROWS ── */
+.s-grid{
+  display:flex;flex-direction:column;
+}
+.s-row{
+  display:grid;
+  grid-template-columns:1fr 1.2fr auto auto;
+  gap:24px;
+  align-items:start;
+  padding:24px 0;
+  border-bottom:1px solid rgba(26,22,21,.08);
+  transition:background .25s;
+}
+.s-row:hover{
+  background:rgba(26,22,21,.025);
+  margin:0 -16px;padding-left:16px;padding-right:16px;
+}
+.s-name{
+  font-weight:700;font-size:1rem;
+  line-height:1.3;
+  display:flex;align-items:center;gap:10px;
+}
+.s-name .tag{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.55rem;letter-spacing:1px;text-transform:uppercase;
+  padding:3px 8px;border-radius:2px;
+  display:inline-block;flex-shrink:0;
+}
+.tag-pop{background:var(--rust);color:#fff}
+.tag-new{background:var(--forest);color:#fff}
+.tag-pro{background:var(--ink);color:var(--cream)}
+
+.s-desc{
+  font-size:.85rem;color:var(--stone);line-height:1.6;
+}
+.s-price{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.85rem;font-weight:700;
+  text-align:right;white-space:nowrap;
+  min-width:140px;
+}
+.s-price small{font-weight:400;color:var(--light-stone);font-size:.7rem;display:block}
+.s-time{
+  font-size:.78rem;color:var(--light-stone);
+  text-align:right;white-space:nowrap;
+  min-width:90px;
+}
+
+/* ── FEATURES LIST (inline) ── */
+.s-feat{
+  display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;
+}
+.s-feat span{
+  font-size:.72rem;
+  padding:3px 10px;
+  border:1px solid rgba(26,22,21,.12);
+  border-radius:2px;
+  color:var(--stone);
+  background:rgba(26,22,21,.02);
+}
+
+/* ── CATEGORY ILLUSTRATION ── */
+.cat-illus{
+  border-radius:6px;
+  padding:48px 40px;
+  margin-bottom:32px;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:32px;overflow:hidden;position:relative;
+}
+.cat-illus-text{position:relative;z-index:1;max-width:480px}
+.cat-illus-text h3{
+  font-family:'DM Serif Display',serif;
+  font-size:1.6rem;font-weight:400;margin-bottom:8px;
+  letter-spacing:-.5px;
+}
+.cat-illus-text p{font-size:.88rem;line-height:1.65;opacity:.8}
+.cat-illus-icons{
+  display:flex;gap:16px;flex-wrap:wrap;justify-content:flex-end;
+  position:relative;z-index:1;
+}
+.cat-illus-icon{
+  width:64px;height:64px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.4rem;backdrop-filter:blur(4px);
+  transition:transform .3s;
+}
+.cat-illus-icon:hover{transform:scale(1.12) rotate(-4deg)}
+
+
+
+/* Illustration themes */
+.illus-web{background:var(--ink);color:var(--cream)}
+.illus-web .cat-illus-icon{background:rgba(246,241,235,.1);color:var(--cream)}
+.illus-web::after{
+  content:'</>';font-family:'JetBrains Mono',monospace;
+  position:absolute;right:40px;bottom:-20px;font-size:8rem;
+  opacity:.04;font-weight:700;color:var(--cream);
+}
+
+.illus-mobile{background:var(--rust);color:#fff}
+.illus-mobile .cat-illus-icon{background:rgba(255,255,255,.15);color:#fff}
+.illus-mobile::after{
+  content:'📱';position:absolute;right:30px;bottom:-10px;font-size:7rem;opacity:.1;
+}
+
+.illus-saas{background:var(--forest);color:#fff}
+.illus-saas .cat-illus-icon{background:rgba(255,255,255,.12);color:#fff}
+.illus-saas::after{
+  content:'☁';position:absolute;right:30px;bottom:-5px;font-size:7rem;opacity:.1;
+}
+
+.illus-api{background:#2c2420;color:var(--cream)}
+.illus-api .cat-illus-icon{background:rgba(246,241,235,.08);color:var(--mustard)}
+.illus-api::after{
+  content:'{ }';font-family:'JetBrains Mono',monospace;
+  position:absolute;right:30px;bottom:-15px;font-size:7rem;
+  opacity:.06;font-weight:700;color:var(--cream);
+}
+
+.illus-design{background:var(--mustard);color:var(--ink)}
+.illus-design .cat-illus-icon{background:rgba(26,22,21,.1);color:var(--ink)}
+.illus-design::after{
+  content:'✦';position:absolute;right:40px;bottom:-5px;font-size:7rem;opacity:.12;
+}
+
+.illus-other{
+  background:linear-gradient(135deg, var(--ink) 0%, #2d2926 100%);
+  color:var(--cream);
+}
+.illus-other .cat-illus-icon{background:rgba(246,241,235,.08);color:var(--cream)}
+
+@media(max-width:700px){
+  .cat-illus{flex-direction:column;padding:32px 24px;text-align:center}
+  .cat-illus-icons{justify-content:center}
+}
+
+/* ── DIVIDER ── */
+.divider{
+  height:2px;background:var(--ink);margin:56px 0 0;
+}
+
+/* ── WHY SECTION ── */
+.why{padding:72px 0;border-bottom:2px solid var(--ink)}
+.why-title{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(1.8rem,4vw,2.8rem);
+  margin-bottom:48px;letter-spacing:-1px;
+}
+.why-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+}
+.why-item{
+  padding:32px 28px;
+  border-left:1px solid rgba(26,22,21,.12);
+}
+.why-item:first-child{border-left:none;padding-left:0}
+.why-num{
+  font-family:'JetBrains Mono',monospace;
+  font-size:2.2rem;font-weight:700;
+  color:var(--rust);margin-bottom:12px;
+}
+.why-h{font-weight:700;font-size:1rem;margin-bottom:8px}
+.why-p{font-size:.84rem;color:var(--stone);line-height:1.65}
+
+/* ── PROCESS ── */
+.process{padding:72px 0;border-bottom:2px solid var(--ink)}
+.process-steps{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:0;
+  margin-top:48px;
+}
+.step{
+  padding:0 24px;
+  border-left:2px solid var(--ink);
+  position:relative;
+}
+.step:first-child{padding-left:0;border-left:none}
+.step-n{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.65rem;letter-spacing:2px;
+  color:var(--rust);margin-bottom:12px;
+  text-transform:uppercase;
+}
+.step-t{font-weight:700;margin-bottom:6px}
+.step-d{font-size:.82rem;color:var(--stone);line-height:1.6}
+
+/* ── FAQ ── */
+.faq{padding:72px 0;border-bottom:2px solid var(--ink)}
+.faq-layout{
+  display:flex;gap:48px;align-items:flex-start;margin-top:40px;
+}
+.faq-list{
+  flex:1;min-width:0;
+}
+.faq-illus{
+  flex-shrink:0;width:280px;position:sticky;top:100px;
+}
+.faq-illus img{
+  width:100%;height:auto;border-radius:6px;
+}
+@media(max-width:800px){
+  .faq-layout{flex-direction:column}
+  .faq-illus{width:200px;margin:0 auto;position:static}
+}
+.fq{
+  padding:18px 0;
+  border-bottom:1px solid rgba(26,22,21,.1);
+  cursor:pointer;
+}
+.fq-q{
+  display:flex;justify-content:space-between;align-items:center;
+  font-weight:600;font-size:.95rem;
+}
+.fq-q::after{
+  content:'+';font-family:'JetBrains Mono',monospace;
+  font-size:1.2rem;color:var(--rust);
+  transition:transform .3s;
+}
+.fq.open .fq-q::after{content:'−'}
+.fq-a{
+  max-height:0;overflow:hidden;
+  transition:max-height .4s ease,padding .3s;
+}
+.fq.open .fq-a{max-height:200px}
+.fq-a-inner{
+  padding-top:12px;
+  font-size:.88rem;color:var(--stone);line-height:1.7;
+}
+
+/* ── CTA ── */
+.cta{
+  padding:80px 0;text-align:center;
+}
+.cta-h{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(2rem,5vw,3.4rem);
+  margin-bottom:12px;letter-spacing:-1px;
+}
+.cta-h em{font-style:italic;color:var(--rust)}
+.cta-p{color:var(--stone);margin-bottom:36px;font-size:1rem;line-height:1.7}
+.cta-btns{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.btn-fill{
+  padding:16px 32px;
+  background:var(--ink);color:var(--cream);
+  font-weight:700;font-size:.9rem;
+  text-decoration:none;border:2px solid var(--ink);
+  transition:all .2s;display:inline-flex;align-items:center;gap:8px;
+}
+.btn-fill:hover{background:var(--rust);border-color:var(--rust)}
+.btn-line{
+  padding:16px 32px;
+  background:transparent;color:var(--ink);
+  font-weight:700;font-size:.9rem;
+  text-decoration:none;border:2px solid var(--ink);
+  transition:all .2s;display:inline-flex;align-items:center;gap:8px;
+}
+.btn-line:hover{background:var(--ink);color:var(--cream)}
+
+/* ── FOOTER ── */
+footer{
+  padding:24px 0;
+  border-top:1px solid rgba(26,22,21,.12);
+  display:flex;justify-content:space-between;
+  font-size:.75rem;color:var(--light-stone);
+  font-family:'JetBrains Mono',monospace;
+}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .s-row{grid-template-columns:1fr;gap:8px}
+  .s-price,.s-time{text-align:left}
+  .why-grid{grid-template-columns:1fr 1fr}
+  .why-item{border-left:none;border-top:1px solid rgba(26,22,21,.12);padding:24px 0}
+  .why-item:first-child,.why-item:nth-child(2){border-top:none}
+  .process-steps{grid-template-columns:1fr;gap:24px}
+  .step{border-left:none;border-top:2px solid var(--ink);padding:20px 0 0}
+  .step:first-child{border-top:none;padding-top:0}
+  .header h1{font-size:clamp(2.6rem,10vw,4rem)}
+}
+/* ── PRODUCTS ── */
+.products{padding:72px 0;border-bottom:2px solid var(--ink)}
+.products-intro{
+  font-size:.9rem;color:var(--stone);line-height:1.7;margin-bottom:40px;
+}
+.products-grid{
+  display:flex;flex-direction:column;
+}
+.product-row{
+  display:grid;grid-template-columns:auto 1fr auto;
+  gap:24px;align-items:center;
+  padding:28px 0;
+  border-bottom:1px solid rgba(26,22,21,.1);
+  transition:background .25s;
+}
+.product-row:hover{
+  background:rgba(26,22,21,.025);
+  margin:0 -16px;padding-left:16px;padding-right:16px;
+}
+.product-name{
+  font-family:'DM Serif Display',serif;
+  font-size:1.3rem;font-weight:400;
+}
+.product-name small{
+  display:block;font-family:'JetBrains Mono',monospace;
+  font-size:.65rem;letter-spacing:1px;text-transform:uppercase;
+  color:var(--light-stone);margin-top:4px;font-weight:400;
+}
+.product-desc{font-size:.85rem;color:var(--stone);line-height:1.6}
+.product-link{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.8rem;color:var(--rust);text-decoration:none;
+  display:inline-flex;align-items:center;gap:6px;
+  white-space:nowrap;
+  padding:8px 18px;
+  border:1.5px solid var(--rust);
+  border-radius:3px;
+  transition:all .2s;
+}
+.product-link:hover{background:var(--rust);color:var(--cream);text-decoration:none}
+
+@media(max-width:600px){
+  .why-grid{grid-template-columns:1fr}
+  .why-item:nth-child(2){border-top:1px solid rgba(26,22,21,.12)}
+  .topbar{flex-direction:column;gap:8px;text-align:center}
+  .header-top{flex-direction:column;align-items:flex-start}
+  .header-meta{text-align:left}
+  footer{flex-direction:column;gap:8px}
+  .product-row{grid-template-columns:1fr;gap:8px}
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="wrap">
+<div class="topbar">
+  <span>TontiGo Studio · Catalogue Tarifaire, Édition Mars 2026</span>
+  <a href="#contact">Demander un devis &rarr;</a>
+</div>
+</div>
+
+<!-- HEADER -->
+<div class="wrap">
+<header class="header">
+  <div class="header-top">
+    <h1>Ce qu'on<br>sait <em>faire</em></h1>
+    <div class="header-meta">
+      <strong>Sites, apps, backend, design, IA.</strong>
+      Tout ce qu'il faut pour construire, lancer et faire grandir un produit digital. Prix en FCFA, devis gratuit sous 24h.
+      <div class="edition-tag">27 services · tarifs 2026</div>
+    </div>
+  </div>
+</header>
+</div>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+<div class="marquee">
+  <span>Sites Web</span><span><b>·</b></span>
+  <span>Applications Mobile</span><span><b>·</b></span>
+  <span>SaaS & Dashboards</span><span><b>·</b></span>
+  <span>API & Backend</span><span><b>·</b></span>
+  <span>UI/UX Design</span><span><b>·</b></span>
+  <span>SEO</span><span><b>·</b></span>
+  <span>Chatbot & IA</span><span><b>·</b></span>
+  <span>Automatisation</span><span><b>·</b></span>
+  <span>Sites Web</span><span><b>·</b></span>
+  <span>Applications Mobile</span><span><b>·</b></span>
+  <span>SaaS & Dashboards</span><span><b>·</b></span>
+  <span>API & Backend</span><span><b>·</b></span>
+  <span>UI/UX Design</span><span><b>·</b></span>
+  <span>SEO</span><span><b>·</b></span>
+  <span>Chatbot & IA</span><span><b>·</b></span>
+  <span>Automatisation</span><span><b>·</b></span>
+</div>
+</div>
+
+<div class="wrap">
+
+<!-- ═══════════ SITES WEB ═══════════ -->
+<div class="cat">
+  <div class="cat-illus illus-web">
+    <div class="cat-illus-text">
+      <h3>Sites Web</h3>
+      <p>Du site vitrine simple à la plateforme e-commerce complète. Votre présence en ligne, pensée pour convertir.</p>
+    </div>
+    <div class="cat-illus-icons">
+      <div class="cat-illus-icon"><i class="fas fa-laptop-code"></i></div>
+      <div class="cat-illus-icon"><i class="fas fa-cart-shopping"></i></div>
+      <div class="cat-illus-icon"><i class="fas fa-pen-nib"></i></div>
+      <div class="cat-illus-icon"><i class="fas fa-magnifying-glass-chart"></i></div>
+    </div>
+  </div>
+  <div class="cat-head">
+    <span class="cat-num">01</span>
+    <span class="cat-name">Sites Web</span>
+    <span class="cat-count">6 offres</span>
+  </div>
+  <div class="s-grid">
+
+    <div class="s-row">
+      <div class="s-name">Landing Page</div>
+      <div class="s-desc">
+        Page unique, droit au but. Présentation + formulaire de contact.
+        <div class="s-feat"><span>Responsive</span><span>SEO de base</span><span>Hébergement 1 an</span></div>
+      </div>
+      <div class="s-price">150 000 FCFA<small>à partir de</small></div>
+      <div class="s-time">5–7 jours</div>
+    </div>
+
+    <div class="s-row">
+      <div class="s-name">Site Vitrine Multi-Pages <span class="tag tag-pop">Populaire</span></div>
+      <div class="s-desc">
+        5 à 10 pages, animations, blog optionnel et admin pour tout gérer vous-même.
+        <div class="s-feat"><span>CMS</span><span>Animations</span><span>Blog</span><span>Admin</span></div>
+      </div>
+      <div class="s-price">300 000 FCFA<small>à partir de</small></div>
+      <div class="s-time">10–15 jours</div>
+    </div>
+
+    <div class="s-row">
+      <div class="s-name">E-Commerce <span class="tag tag-pop">Populaire</span></div>
+      <div class="s-desc">
+        Boutique complète. Catalogue produits, paiement Mobile Money & cartes, suivi de commandes, notifications.
+        <div class="s-feat"><span>Mobile Money</span><span>Gestion stocks</span><span>SMS/Email</span><span>Tableau de bord</span></div>
+      </div>
+      <div class="s-price">500 000 FCFA<small>à partir de</small></div>
+      <div class="s-time">3–5 semaines</div>
+    </div>
+
+    <div class="s-row">
+      <div class="s-name">Blog / Site de Contenu</div>
+      <div class="s-desc">
+        Plateforme éditoriale avec CMS, catégories, partage social et commentaires.
+        <div class="s-feat"><span>CMS</span><span>SEO optimisé</span><span>Commentaires</span></div>
+      </div>
+      <div class="s-price">200 000 FCFA<small>à partir de</small></div>
+      <div class="s-time">7–12 jours</div>
+    </div>
+
+    <div class="s-row">
+      <div class="s-name">Site Sur-Mesure Complexe <span class="tag tag-pro">Pro</span></div>
+      <div class="s-desc">
+        Portails, espaces membres, intégrations API. Architecture pensée pour votre métier.
+        <div class="s-feat"><span>Espace membre</span><span>API tierces</span><span>Tests</span><span>Documentation</span></div>
+      </div>
+      <div class="s-price">800 000 FCFA<small>à partir de</small></div>
+      <div class="s-time">4–8 semaines</div>
+    </div>
+
+    <div class="s-row">
+      <div class="s-name">Refonte / Redesign</div>
+      <div class="s-desc">
+        Audit de l'existant, nouveau design, migration de contenu, boost performances.
+        <div class="s-feat"><span>Audit</span><span>Migration</span><span>Performances</span></div>
+      </div>
+      <div class="s-price">250 000 FCFA<small>à partir de</small></div>
+      <div class="s-time">10–20 jours</div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════ APPS MOBILE ═══════════ -->
+<div class="cat">
+  <div class="cat-illus illus-mobile">
+    <div class="cat-illus-text">
+      <h3>Applications Mobile</h3>
+      <p>iOS, Android ou les deux. Des apps rapides, fiables, publiées sur les stores et prêtes à scaler.</p>
+    </div>
+    <div class="cat-illus-icons">
+      <div class="cat-illus-icon"><i class="fab fa-apple"></i></div>
+      <div class="cat-illus-icon"><i class="fab fa-android"></i></div>
+      <div class="cat-illus-icon"><i class="fab fa-react"></i></div>
+      <div class="cat-illus-icon"><i class="fas fa-bell"></i></div>
+    </div>
+  </div>
+  <div class="cat-head">
+    <span class="cat-num">02</span>
+    <span class="cat-name">Applications Mobile</span>
+    <span class="cat-count">4 offres</span>
+  </div>
+  <div class="s-grid">
+
+    <div class="s-row">
+      <div class="s-name">App Native <small style="font-weight:400;color:var(--stone)">(iOS ou Android)</small></div>
+      <div class="s-desc">
+        Performance maximale pour une plateforme. UI native, notifications push, publication store.
+        <div class="s-feat"><span>Push notifs</span><span>Publication store</span><span>Support 1 mois</span></div>
+      </div>
+      <div class="s-price">800 000 FCFA<small>à partir de</small></div>
+      <div class="s-time">4–8 semaines</div>
+    </div>
+
+    <div class="s-row">
+      <div class="s-name">App Cross-Platform <span class="tag tag-pop">Populaire</span></div>
+      <div class="s-desc">
+        iOS + Android d'un coup. React Native ou Flutter. Meilleur rapport qualité-prix.
+        <div class="s-feat"><span>iOS & Android</span><span>2 stores</span><span>OTA updates</span></div>
+      </div>
+      <div class="s-price">1 200 000 FCFA<small>à partir de</small></div>
+      <div class="s-time">6–12 semaines</div>
+    </div>
+
+    <div class="s-row">
+      <div class="s-name">App + Backend complet <span class="tag tag-pro">Pro</span></div>
+      <div class="s-desc">
+        App + serveur dédié, base de données, auth, logique métier. Solution clé en main.
+        <div class="s-feat"><span>Backend Go/Node</span><span>PostgreSQL</span><span>Auth JWT</span><span>API documentée</span></div>
+      </div>
+      <div class="s-price">1 800 000 FCFA<small>à partir de</small></div>
+      <div class="s-time">8–16 semaines</div>
+    </div>
+
+    <div class="s-row">
+      <div class="s-name">Maintenance & Mises à Jour</div>
+      <div class="s-desc">
+        Forfait mensuel. Bugs, sécurité, petites évolutions, monitoring.
+        <div class="s-feat"><span>Bugfix prioritaire</span><span>Sécurité</span><span>Monitoring</span></div>
+      </div>
+      <div class="s-price">100 000 FCFA<small>/mois</small></div>
+      <div class="s-time">Continu</div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════ WEB & SAAS ═══════════ -->
+<div class="cat">
+  <div class="cat-illus illus-saas">
+    <div class="cat-illus-text">
+      <h3>Applications Web & SaaS</h3>
+      <p>Dashboards, outils métier, plateformes SaaS. Des apps web robustes qui tournent 24/7.</p>
+    </div>
+    <div class="cat-illus-icons">
+      <div class="cat-illus-icon"><i class="fas fa-chart-line"></i></div>
+      <div class="cat-illus-icon"><i class="fas fa-cloud"></i></div>
+      <div class="cat-illus-icon"><i class="fas fa-gauge-high"></i></div>
+      <div class="cat-illus-icon"><i class="fas fa-users-gear"></i></div>
+    </div>
+  </div>
+  <div class="cat-head">
+    <span class="cat-num">03</span>
+    <span class="cat-name">Applications Web & SaaS</span>
+    <span class="cat-count">4 offres</span>
+  </div>
+  <div class="s-grid">
+
+    <div class="s-row">
+      <div class="s-name">Dashboard / Admin Panel</div>
+      <div class="s-desc">
+        Interface d'admin avec KPIs temps réel, gestion utilisateurs, exports CSV/PDF.
+        <div class="s-feat"><span>Graphiques live</span><span>Rôles</span><span>Exports</span><span>Responsive</span></div>
+      </div>
+      <div class="s-price">600 000 FCFA<small>à partir de</small></div>
+      <div class="s-time">3–6 semaines</div>
+    </div>
+
+    <div class="s-row">
+      <div class="s-name">App Web Métier</div>
+      <div class="s-desc">
+        Outil sur-mesure qui digitalise vos processus. Workflows, documents, notifications.
+        <div class="s-feat"><span>Workflows</span><span>Gestion docs</span><span>Audit trail</span></div>
+      </div>
+      <div class="s-price">1 000 000 FCFA<small>à partir de</small></div>
+      <div class="s-time">6–12 semaines</div>
+    </div>
+
+    <div class="s-row">
+      <div class="s-name">Plateforme SaaS <span class="tag tag-pro">Pro</span></div>
+      <div class="s-desc">
+        De A à Z. Multi-tenants, abonnements, facturation auto, infrastructure scalable.
+        <div class="s-feat"><span>Multi-tenant</span><span>Abonnements</span><span>Facturation</span><span>Scalable</span></div>
+      </div>
+      <div class="s-price">3 000 000 FCFA<small>à partir de</small></div>
+      <div class="s-time">3–6 mois</div>
+    </div>
+
+    <div class="s-row">
+      <div class="s-name">Progressive Web App</div>
+      <div class="s-desc">
+        S'installe comme une app, fonctionne hors-ligne, chargement ultra-rapide. Pas besoin de store.
+        <div class="s-feat"><span>Hors-ligne</span><span>Push notifs</span><span>Installable</span></div>
+      </div>
+      <div class="s-price">400 000 FCFA<small>à partir de</small></div>
+      <div class="s-time">2–4 semaines</div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════ BACKEND & API ═══════════ -->
+<div class="cat">
+  <div class="cat-illus illus-api">
+    <div class="cat-illus-text">
+      <h3>Backend & API</h3>
+      <p>Le moteur invisible de vos produits. APIs solides, intégrations paiement, bases de données fiables.</p>
+    </div>
+    <div class="cat-illus-icons">
+      <div class="cat-illus-icon"><i class="fas fa-server"></i></div>
+      <div class="cat-illus-icon"><i class="fas fa-database"></i></div>
+      <div class="cat-illus-icon"><i class="fas fa-plug"></i></div>
+      <div class="cat-illus-icon"><i class="fas fa-lock"></i></div>
+    </div>
+  </div>
+  <div class="cat-head">
+    <span class="cat-num">04</span>
+    <span class="cat-name">Backend & API</span>
+    <span class="cat-count">4 offres</span>
+  </div>
+  <div class="s-grid">
+
+    <div class="s-row">
+      <div class="s-name">API REST</div>
+      <div class="s-desc">
+        Endpoints CRUD, auth JWT/OAuth, documentation Swagger, rate limiting.
+        <div class="s-feat"><span>CRUD</span><span>JWT/OAuth</span><span>Swagger</span><span>Sécurité</span></div>
+      </div>
+      <div class="s-price">350 000 FCFA<small>à partir de</small></div>
+      <div class="s-time">2–4 semaines</div>
+    </div>
+
+    <div class="s-row">
+      <div class="s-name">API Temps Réel</div>
+      <div class="s-desc">
+        WebSocket / SSE pour chat, notifications live, dashboards. Reconnexion auto, scalable.
+        <div class="s-feat"><span>WebSocket</span><span>Rooms</span><span>Reconnexion auto</span></div>
+      </div>
+      <div class="s-price">500 000 FCFA<small>à partir de</small></div>
+      <div class="s-time">3–5 semaines</div>
+    </div>
+
+    <div class="s-row">
+      <div class="s-name">Intégration Services Tiers <span class="tag tag-pop">Populaire</span></div>
+      <div class="s-desc">
+        MTN, Moov, Celtiis, Stripe, Twilio, Resend… On connecte tout.
+        <div class="s-feat"><span>Paiement</span><span>SMS</span><span>Email</span><span>Webhooks</span></div>
+      </div>
+      <div class="s-price">150 000 FCFA<small>/ intégration</small></div>
+      <div class="s-time">3–7 jours</div>
+    </div>
+
+    <div class="s-row">
+      <div class="s-name">Migration Base de Données</div>
+      <div class="s-desc">
+        Audit, mapping, scripts testés, validation d'intégrité, plan de rollback.
+        <div class="s-feat"><span>Audit</span><span>Scripts</span><span>Validation</span><span>Rollback</span></div>
+      </div>
+      <div class="s-price">200 000 FCFA<small>à partir de</small></div>
+      <div class="s-time">3–10 jours</div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════ DESIGN ═══════════ -->
+<div class="cat">
+  <div class="cat-illus illus-design">
+    <div class="cat-illus-text">
+      <h3>Design & UI/UX</h3>
+      <p>Des interfaces qui marquent. Maquettes Figma, identité visuelle, design systems complets.</p>
+    </div>
+    <div class="cat-illus-icons">
+      <div class="cat-illus-icon"><i class="fab fa-figma"></i></div>
+      <div class="cat-illus-icon"><i class="fas fa-palette"></i></div>
+      <div class="cat-illus-icon"><i class="fas fa-vector-square"></i></div>
+      <div class="cat-illus-icon"><i class="fas fa-eye"></i></div>
+    </div>
+  </div>
+  <div class="cat-head">
+    <span class="cat-num">05</span>
+    <span class="cat-name">Design & UI/UX</span>
+    <span class="cat-count">3 offres</span>
+  </div>
+  <div class="s-grid">
+
+    <div class="s-row">
+      <div class="s-name">Maquettes UI/UX <span class="tag tag-pop">Populaire</span></div>
+      <div class="s-desc">
+        Wireframes, prototypes interactifs, tests utilisateurs. Fichier Figma livré.
+        <div class="s-feat"><span>Figma</span><span>Prototypes</span><span>Tests UX</span><span>Responsive</span></div>
+      </div>
+      <div class="s-price">200 000 FCFA<small>à partir de</small></div>
+      <div class="s-time">5–10 jours</div>
+    </div>
+
+    <div class="s-row">
+      <div class="s-name">Identité Visuelle</div>
+      <div class="s-desc">
+        Logo, palette, typographie, guide d'utilisation. Fichiers sources inclus.
+        <div class="s-feat"><span>Logo</span><span>Palette</span><span>Typo</span><span>Guide</span><span>AI/SVG</span></div>
+      </div>
+      <div class="s-price">250 000 FCFA<small>à partir de</small></div>
+      <div class="s-time">7–14 jours</div>
+    </div>
+
+    <div class="s-row">
+      <div class="s-name">Design System <span class="tag tag-pro">Pro</span></div>
+      <div class="s-desc">
+        Composants réutilisables, tokens, documentation. Pour les équipes qui scalent.
+        <div class="s-feat"><span>Composants Figma</span><span>Tokens</span><span>Storybook</span></div>
+      </div>
+      <div class="s-price">500 000 FCFA<small>à partir de</small></div>
+      <div class="s-time">2–4 semaines</div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════ AUTRES ═══════════ -->
+<div class="cat">
+  <div class="cat-illus illus-other">
+    <div class="cat-illus-text">
+      <h3>Autres Services</h3>
+      <p>SEO, hébergement, maintenance, formation, chatbots IA, automatisation. Tout le reste pour que ça tourne.</p>
+    </div>
+    <div class="cat-illus-icons">
+      <div class="cat-illus-icon"><i class="fas fa-robot"></i></div>
+      <div class="cat-illus-icon"><i class="fas fa-graduation-cap"></i></div>
+      <div class="cat-illus-icon"><i class="fas fa-gears"></i></div>
+      <div class="cat-illus-icon"><i class="fas fa-rocket"></i></div>
+    </div>
+  </div>
+  <div class="cat-head">
+    <span class="cat-num">06</span>
+    <span class="cat-name">Autres Services</span>
+    <span class="cat-count">6 offres</span>
+  </div>
+  <div class="s-grid">
+
+    <div class="s-row">
+      <div class="s-name">SEO / Référencement</div>
+      <div class="s-desc">
+        Audit, optimisation on-page, stratégie de mots-clés, suivi mensuel.
+        <div class="s-feat"><span>Audit SEO</span><span>On-page</span><span>Mots-clés</span><span>Rapports</span></div>
+      </div>
+      <div class="s-price">100 000 FCFA<small>/mois, 3 mois min.</small></div>
+      <div class="s-time">Continu</div>
+    </div>
+
+    <div class="s-row">
+      <div class="s-name">Hébergement & Déploiement</div>
+      <div class="s-desc">
+        Mise en prod, SSL, CI/CD, monitoring, backups automatiques.
+        <div class="s-feat"><span>SSL</span><span>CI/CD</span><span>Monitoring</span><span>Backups</span></div>
+      </div>
+      <div class="s-price">50 000 FCFA<small>/mois</small></div>
+      <div class="s-time">Continu</div>
+    </div>
+
+    <div class="s-row">
+      <div class="s-name">Maintenance Mensuelle</div>
+      <div class="s-desc">
+        Mises à jour sécurité, sauvegardes, support email & téléphone, rapports.
+        <div class="s-feat"><span>Sécurité</span><span>Sauvegardes</span><span>Support</span><span>Rapports</span></div>
+      </div>
+      <div class="s-price">75 000 FCFA<small>/mois</small></div>
+      <div class="s-time">Continu</div>
+    </div>
+
+    <div class="s-row">
+      <div class="s-name">Formation & Accompagnement</div>
+      <div class="s-desc">
+        Sessions visio ou présentiel, documentation, vidéos tutos, support post-formation.
+        <div class="s-feat"><span>Visio/Présentiel</span><span>Documentation</span><span>Vidéos</span></div>
+      </div>
+      <div class="s-price">50 000 FCFA<small>/ session (1–2h)</small></div>
+      <div class="s-time">À la demande</div>
+    </div>
+
+    <div class="s-row">
+      <div class="s-name">Chatbot / IA Intégrée <span class="tag tag-new">Nouveau</span></div>
+      <div class="s-desc">
+        Agent conversationnel IA pour votre site ou WhatsApp. Support client 24/7.
+        <div class="s-feat"><span>GPT/Claude</span><span>Base de connaissances</span><span>WhatsApp</span><span>Dashboard</span></div>
+      </div>
+      <div class="s-price">300 000 FCFA<small>à partir de</small></div>
+      <div class="s-time">1–3 semaines</div>
+    </div>
+
+    <div class="s-row">
+      <div class="s-name">Automatisation <span class="tag tag-new">Nouveau</span></div>
+      <div class="s-desc">
+        Fini les tâches répétitives. Emails auto, sync données, rapports générés.
+        <div class="s-feat"><span>Workflows</span><span>Intégrations</span><span>Monitoring</span></div>
+      </div>
+      <div class="s-price">200 000 FCFA<small>à partir de</small></div>
+      <div class="s-time">1–3 semaines</div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════ WHY ═══════════ -->
+<section class="why">
+  <div class="why-title">Pourquoi nous</div>
+  <div class="why-grid">
+    <div class="why-item">
+      <div class="why-num">24h</div>
+      <div class="why-h">Réponse garantie</div>
+      <div class="why-p">Votre brief arrive, un devis détaillé repart sous 24 heures. Pas de semaines d'attente.</div>
+    </div>
+    <div class="why-item">
+      <div class="why-num">100%</div>
+      <div class="why-h">Code à vous</div>
+      <div class="why-p">Tout le code source vous appartient. Pas de lock-in, pas de dépendance. Vous partez quand vous voulez.</div>
+    </div>
+    <div class="why-item">
+      <div class="why-num">0</div>
+      <div class="why-h">Frais cachés</div>
+      <div class="why-p">Le devis dit 500k, vous payez 500k. Les surprises c'est pour les anniversaires, pas les factures.</div>
+    </div>
+    <div class="why-item">
+      <div class="why-num">40/30/30</div>
+      <div class="why-h">Paiement flexible</div>
+      <div class="why-p">40% à la signature, 30% à mi-parcours, 30% à la livraison. MTN, Moov, Celtiis, virement bancaire.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ PROCESS ═══════════ -->
+<section class="process">
+  <div class="why-title">Comment ça se passe</div>
+  <div class="process-steps">
+    <div class="step">
+      <div class="step-n">Étape 01</div>
+      <div class="step-t">Brief</div>
+      <div class="step-d">Vous décrivez votre besoin. Appel de 30 min ou message WhatsApp, à vous de voir.</div>
+    </div>
+    <div class="step">
+      <div class="step-n">Étape 02</div>
+      <div class="step-t">Devis</div>
+      <div class="step-d">Retour sous 24h avec prix, délais, specs. On ajuste ensemble si besoin.</div>
+    </div>
+    <div class="step">
+      <div class="step-n">Étape 03</div>
+      <div class="step-t">Design</div>
+      <div class="step-d">Maquettes Figma validées avant de toucher une ligne de code.</div>
+    </div>
+    <div class="step">
+      <div class="step-n">Étape 04</div>
+      <div class="step-t">Dev</div>
+      <div class="step-d">Sprints courts, démos régulières. Vous voyez le produit avancer chaque semaine.</div>
+    </div>
+    <div class="step">
+      <div class="step-n">Étape 05</div>
+      <div class="step-t">Lancement</div>
+      <div class="step-d">Tests, déploiement, formation. On ne disparaît pas après. Support inclus 1 mois.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FAQ ═══════════ -->
+<section class="faq">
+  <div class="why-title">Questions fréquentes</div>
+  <div class="faq-layout">
+  <div class="faq-list">
+
+    <div class="fq">
+      <div class="fq-q">Les prix sont fixes ?</div>
+      <div class="fq-a"><div class="fq-a-inner">Non. Ce sont des points de départ. Le tarif final dépend de votre projet. On vous fait un devis détaillé et transparent. Gratuit, sans engagement.</div></div>
+    </div>
+
+    <div class="fq">
+      <div class="fq-q">Je suis propriétaire du code ?</div>
+      <div class="fq-a"><div class="fq-a-inner">Oui, à 100%. Code source, maquettes Figma, documentation. Tout vous est livré. Aucun lock-in.</div></div>
+    </div>
+
+    <div class="fq">
+      <div class="fq-q">Comment on paye ?</div>
+      <div class="fq-a"><div class="fq-a-inner">MTN Mobile Money, Moov Money, Celtiis ou virement bancaire. Paiement en 3 fois : 40% à la signature, 30% à mi-parcours, 30% à la livraison.</div></div>
+    </div>
+
+    <div class="fq">
+      <div class="fq-q">Y a un support après livraison ?</div>
+      <div class="fq-a"><div class="fq-a-inner">1 mois de support inclus sur chaque projet. Ensuite, forfait maintenance mensuel si vous voulez qu'on continue à veiller sur votre produit.</div></div>
+    </div>
+
+    <div class="fq">
+      <div class="fq-q">Combien de temps pour avoir un devis ?</div>
+      <div class="fq-a"><div class="fq-a-inner">24 à 48h max. Envoyez votre brief par WhatsApp ou email, on revient vite.</div></div>
+    </div>
+
+    <div class="fq">
+      <div class="fq-q">Vous travaillez avec des clients hors du pays ?</div>
+      <div class="fq-a"><div class="fq-a-inner">Oui. Visio, Slack, WhatsApp. On s'adapte à votre fuseau horaire. Même qualité, même rigueur.</div></div>
+    </div>
+
+  </div>
+  <div class="faq-illus">
+    <img src="Person floating with.png" alt="Illustration FAQ">
+  </div>
+  </div>
+</section>
+
+<!-- ═══════════ NOS PRODUITS ═══════════ -->
+<section class="products">
+  <div class="why-title">Nos produits</div>
+  <p class="products-intro">On ne fait pas que des sites pour les autres. Voici ce qu'on a construit nous-mêmes.</p>
+  <div class="products-grid">
+
+    <div class="product-row">
+      <div class="product-name">TontiGo App<small>Application mobile</small></div>
+      <div class="product-desc">Première app de tontine digitale en Afrique. Groupes, cotisations, paiements Mobile Money, tout automatisé.</div>
+      <a href="https://tontiigo.app" class="product-link" target="_blank">tontiigo.app &rarr;</a>
+    </div>
+
+    <div class="product-row">
+      <div class="product-name">TontiGo Website<small>Site vitrine</small></div>
+      <div class="product-desc">Notre vitrine. Mission, équipe, téléchargement de l'app et blog.</div>
+      <a href="https://tontiigo.com" class="product-link" target="_blank">tontiigo.com &rarr;</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════ CTA ═══════════ -->
+<section class="cta" id="contact">
+  <div class="cta-h">Parlons de <em>votre projet</em></div>
+  <div class="cta-p">Décrivez votre idée, on revient avec un devis sous 24h. Gratuit, sans engagement.</div>
+  <div class="cta-btns">
+    <a href="mailto:tontigo.contact@gmail.com" class="btn-fill"><i class="fas fa-paper-plane"></i> Envoyer un brief</a>
+    <a href="https://wa.me/2290162240254" class="btn-line"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+  </div>
+</section>
+
+</div>
+
+<div class="wrap">
+<footer>
+  <span>&copy; 2026 TontiGo Studio · Tarifs indicatifs, devis sur demande</span>
+  <span>Mis à jour Mars 2026</span>
+</footer>
+</div>
+
+<script>
+document.querySelectorAll('.fq').forEach(fq=>{
+  fq.querySelector('.fq-q').addEventListener('click',()=>{
+    const wasOpen=fq.classList.contains('open');
+    document.querySelectorAll('.fq.open').forEach(f=>f.classList.remove('open'));
+    if(!wasOpen)fq.classList.add('open');
+  });
+});
+</script>
+</body>
+</html>
